@@ -32,4 +32,10 @@ public class UserService {
         }
     }
 
+    //Regex to check the strength of the password.Password should contain atleast one small or capital letter,1 number and 1 special character
+    public boolean checkPasswordStrength(String password){
+        String pattern = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^!&*+=]).*$";
+        return password.matches(pattern);
+    }
+
 }
