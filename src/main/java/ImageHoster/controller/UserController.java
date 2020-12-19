@@ -42,10 +42,10 @@ public class UserController {
     //Checks if the added password follows the criteria of one alphabet,one number and one special symbol
     @RequestMapping(value = "users/registration", method = RequestMethod.POST)
     public String registerUser(User user,Model model) {
-        boolean checkPassword = userService.checkPasswordStrength(user.getPassword());
+        boolean checkPassword = checkPasswordStrength(user.getPassword());
         if(checkPassword){
             userService.registerUser(user);
-            return "redirect:/users/login";
+            return "users/login";
         }
         else
         {
@@ -93,5 +93,10 @@ public class UserController {
         List<Image> images = imageService.getAllImages();
         model.addAttribute("images", images);
         return "index";
+    }
+    //Regex to check the strength of the password.Password should contain atleast one small or capital letter,1 number and 1 special character
+    public boolean checkPasswordStrength(String password){
+        String pattern = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^!&*+=]).*$";
+        return password.matches(pattern);
     }
 }

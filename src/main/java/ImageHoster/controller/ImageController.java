@@ -99,7 +99,7 @@ public class ImageController {
         User loggedUser = (User) session.getAttribute("loggeduser");
         Image image = imageService.getImage(imageId);
         model.addAttribute("image", image);
-        if(image.getUser().getId().equals(loggedUser.getId())){
+        if(image.getUser().getId()!=null && image.getUser().getId().equals(loggedUser.getId())){
             String tags = convertTagsToString(image.getTags());
             model.addAttribute("tags", tags);
             return "images/edit";
@@ -156,7 +156,7 @@ public class ImageController {
     public String deleteImageSubmit(@RequestParam(name = "imageId") Integer imageId,HttpSession session,Model model) {
         User loggedUser = (User) session.getAttribute("loggeduser");
         Image image = imageService.getImage(imageId);
-        if(image.getUser().getId().equals(loggedUser.getId())) {
+        if(image.getUser().getId()!=null && image.getUser().getId().equals(loggedUser.getId())) {
             imageService.deleteImage(imageId);
             return "redirect:/images";
         }

@@ -5,6 +5,9 @@ import ImageHoster.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
 public class UserService {
 
@@ -32,10 +35,5 @@ public class UserService {
         }
     }
 
-    //Regex to check the strength of the password.Password should contain atleast one small or capital letter,1 number and 1 special character
-    public boolean checkPasswordStrength(String password){
-        String pattern = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^!&*+=]).*$";
-        return password.matches(pattern);
-    }
 
 }
